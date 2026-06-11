@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrinho 2026 - Agro Forte, Futuro Sustentável</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícones e Fontes Premium -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body>
+
+    <!-- HUB FLUTUANTE DE ACESSIBILIDADE PREMIUM -->
+    <div class="hub-acessibilidade" role="region" aria-label="Ajustes de Acessibilidade">
+        <div class="hub-header">
+            <i class="fa-solid fa-universal-access"></i>
+            <span>Acessibilidade</span>
+        </div>
+        
+        <div class="hub-controle">
+            <label for="slider-fonte">Tamanho da Letra</label>
+            <div class="slider-wrapper">
+                <i class="fa-solid fa-font-case size-s"></i>
+                <input type="range" id="slider-fonte" min="14" max="32" value="16" step="2">
+                <i class="fa-solid fa-font-case size-l"></i>
+            </div>
+        </div>
+
+        <div class="hub-botoes">
+            <button class="btn-hub" id="btn-contraste" title="Alternar Alto Contraste">
+                <i class="fa-solid fa-circle-half-stroke"></i> Cores
+            </button>
+            <button class="btn-hub" id="btn-leitura" title="Ouvir texto da página">
+                <i class="fa-solid fa-volume-high"></i> Ouvir
+            </button>
+        </div>
+    </div>
+
+    <!-- SEÇÃO HERO (CABEÇALHO) -->
+    <header class="hero-header">
+        <div class="badge">Concurso Agrinho 2026</div>
+        <h1>Agro Forte, <br><span class="gradient-text">Futuro Sustentável</span></h1>
+        <p>O equilíbrio perfeito entre a vanguarda tecnológica da produção no campo e a preservação do meio ambiente.</p>
+    </header>
+
+    <!-- CONTAINER DA APLICAÇÃO -->
+    <main class="app-container">
+        
+        <!-- ABAS OPERACIONAIS NATIVAS -->
+        <div class="abas-wrapper" role="tablist">
+            <button id="tab-projeto" class="aba-item ativa" role="tab" aria-selected="true" aria-controls="painel-projeto">
+                <i class="fa-solid fa-seedling"></i> O Projeto
+            </button>
+            <button id="tab-agro" class="aba-item" role="tab" aria-selected="false" aria-controls="painel-agro">
+                <i class="fa-solid fa-tractor"></i> Agro Forte
+            </button>
+            <button id="tab-sustentavel" class="aba-item" role="tab" aria-selected="false" aria-controls="painel-sustentavel">
+                <i class="fa-solid fa-earth-americas"></i> Sustentabilidade
+            </button>
+        </div>
+
+        <!-- CONTEÚDOS DAS ABAS -->
+        <section id="painel-projeto" class="painel-conteudo ativo" role="tabpanel" aria-labelledby="tab-projeto">
+            <h2><i class="fa-solid fa-graduation-cap-display fa-graduation-cap"></i> Consciência que Transforma</h2>
+            <p id="texto-projeto">O Agrinho 2026 convida a comunidade escolar a entender o campo como um motor ecológico inovador. Produzir alimentos em larga escala respeitando a integridade das florestas nativas e bacias hidrográficas não é apenas uma meta, é a realidade do nosso futuro.</p>
+        </section>
+
+        <section id="painel-agro" class="painel-conteudo" role="tabpanel" aria-labelledby="tab-agro">
+            <h2><i class="fa-solid fa-chart-line-up fa-chart-line"></i> Tecnologia de Alta Performance</h2>
+            <p id="texto-agro">A força do agronegócio moderno vem da tecnologia limpa. Drones de imageamento térmico, análise automatizada de solo e plantio de precisão permitem colheitas recordes otimizando o uso de água e insumos, sem abrir novas áreas de mata.</p>
+        </section>
+
+        <section id="painel-sustentavel" class="painel-conteudo" role="tabpanel" aria-labelledby="tab-sustentavel">
+            <h2><i class="fa-solid fa-hand-holding-seedling fa-hand-holding-droplet"></i> Ecossistema Preservado</h2>
+            <p id="texto-sustentavel">Sustentabilidade prática é baseada em dados: rotação de culturas, manejo biológico de pragas e o sistema de plantio direto que regenera a microbiota da terra. O produtor rural atua como o verdadeiro escudo de proteção dos biomas.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Plataforma Agrinho 2026 — Tecnologia, Design e Acessibilidade em Perfeita Sintonia.</p>
+    </footer>
+
+    <!-- INTERATIVIDADE E INTEGRAÇÃO JSON -->
+    <script>
+        let config = {};
+        let lendoVoz = false;
+
+        // Elementos do Layout
+        const sliderFonte = document.getElementById('slider-fonte');
+        const btnContraste = document.getElementById('btn-contraste');
+        const btnLeitura = document.getElementById('btn-leitura');
+        const abas = document.querySelectorAll('.aba-item');
+        const paineis = document.querySelectorAll('.painel-conteudo');
+
+        // Carrega as configurações dinâmicas do JSON
+        async function carregarConfiguracoes() {
+            try {
+                const resposta = await fetch('settings.json');
+                config = await resposta.json();
+                inicializarApp();
+            } catch (erro) {
+                console.warn("JSON local bloqueado pelo navegador (CORS). Aplicando padrões de segurança em cache.");
+                config = {
+                    typography: { fontMinPx: 14, fontMaxPx: 32, fontStep: 2, fontDefaultPx: 16 },
+                    audio: { lang: 'pt-BR', rate: 1.05 }
+                };
+                inicializarApp();
+            }
+        }
+
+        function inicializarApp() {
+            // Seta os limites do slider com os dados reais vindos do JSON
+            sliderFonte.min = config.typography.fontMinPx;
+            sliderFonte.max = config.typography.fontMaxPx;
+            sliderFonte.step = config.typography.fontStep;
+
+            // Restaura configurações salvas em memória
+            const fonteSalva = localStorage.getItem('agrinho-fonte') || config.typography.fontDefaultPx + 'px';
+            const contrasteSalvo = localStorage.getItem('agrinho-contraste');
+
+            document.documentElement.style.setProperty('--font-size-base', fonteSalva);
+            sliderFonte.value = parseInt(fonteSalva);
+
+            if (contrasteSalvo === 'ativo') {
+                document.body.classList.add('alto-contraste');
+            }
+        }
+
+        // Evento Funcional: Mudar Tamanho da Fonte Real
+        sliderFonte.addEventListener('input', (e) => {
+            const novoTamanho = e.target.value + 'px';
+            document.documentElement.style.setProperty('--font-size-base', novoTamanho);
+            localStorage.setItem('agrinho-fonte', novoTamanho);
+        });
+
+        // Evento Funcional: Alternar Alto Contraste com Memória
+        btnContraste.addEventListener('click', () => {
+            const ativo = document.body.classList.toggle('alto-contraste');
+            localStorage.setItem('agrinho-contraste', ativo ? 'ativo' : 'inativo');
+        });
+
+        // Evento Funcional: Motor de Áudio Nativo do Sistema
+        btnLeitura.addEventListener('click', () => {
+            if (lendoVoz) {
+                window.speechSynthesis.cancel();
+                lendoVoz = false;
+                btnLeitura.innerHTML = '<i class="fa-solid fa-volume-high"></i> Cores';
+                btnLeitura.style.background = '';
+                return;
+            }
+
+            const textoAtivo = document.querySelector('.painel-conteudo.ativo p').innerText;
+            const fala = new SpeechSynthesisUtterance(textoAtivo);
+            fala.lang = config.audio?.lang || 'pt-BR';
+            fala.rate = config.audio?.rate || 1.0;
+
+            fala.onend = () => {
+                lendoVoz = false;
+                btnLeitura.innerHTML = '<i class="fa-solid fa-volume-high"></i> Ouvir';
+            };
+
+            window.speechSynthesis.speak(fala);
+            lendoVoz = true;
+            btnLeitura.innerHTML = '<i class="fa-solid fa-stop"></i> Parar';
+        });
+
+        // Mecânica de Troca de Abas com Efeito Visual
+        abas.forEach((aba, index) => {
+            aba.addEventListener('click', () => {
+                if (lendoVoz) window.speechSynthesis.cancel();
+                lendoVoz = false;
+                btnLeitura.innerHTML = '<i class="fa-solid fa-volume-high"></i> Ouvir';
+
+                abas.forEach(a => {
+                    a.classList.remove('ativa');
+                    a.setAttribute('aria-selected', 'false');
+                });
+                paineis.forEach(p => p.classList.remove('ativo'));
+
+                aba.classList.add('ativa');
+                aba.setAttribute('aria-selected', 'true');
+                paineis[index].classList.add('ativo');
+            });
+        });
+
+        // Inicia o App
+        carregarConfiguracoes();
+    </script>
+</body>
+</html>

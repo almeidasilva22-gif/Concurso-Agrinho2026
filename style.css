@@ -1,0 +1,291 @@
+/* --- DESIGN SYSTEM REFINADO (VISUAL PREMIUM) --- */
+:root {
+    --font-size-base: 16px;
+    
+    /* Paleta Cromática Ecológica Fina */
+    --gradient-bg: linear-gradient(135deg, #f2f9f4 0%, #e3edf2 100%);
+    --panel-glass: rgba(255, 255, 255, 0.75);
+    --text-main: #162e1d;
+    --text-muted: #4e5d54;
+    --color-primary: #1b5e20;      /* Verde Profundo */
+    --color-secondary: #0d47a1;    /* Azul Preservação */
+    --color-accent: #f59e0b;       /* Destaque Ouro */
+    --border-glass: 1px solid rgba(255, 255, 255, 0.6);
+    --shadow-premium: 0 24px 48px rgba(27, 94, 32, 0.06);
+    
+    --radius-xl: 32px;
+    --radius-md: 16px;
+    --transicao: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- RE-ESTILIZAÇÃO TOTAL: MODO ALTO CONTRASTE --- */
+body.alto-contraste {
+    --gradient-bg: #000000;
+    --panel-glass: #121212;
+    --text-main: #ffffff;
+    --text-muted: #e0e0e0;
+    --color-primary: #00ff66;
+    --color-secondary: #00ffff;
+    --color-accent: #ffff00;
+    --border-glass: 2px solid #ffffff;
+    --shadow-premium: none;
+}
+
+/* --- COMPORTAMENTOS GERAIS --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, transform var(--transicao), box-shadow var(--transicao);
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: var(--font-size-base);
+    background: var(--gradient-bg);
+    color: var(--text-muted);
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* --- HUB DE ACESSIBILIDADE ULTRA MODERNO --- */
+.hub-acessibilidade {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    background: var(--panel-glass);
+    border: 1px solid rgba(27, 94, 32, 0.15);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    width: 280px;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.05);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+}
+
+body.alto-contraste .hub-acessibilidade {
+    border: var(--border-glass);
+}
+
+.hub-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+}
+
+.hub-controle label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+.slider-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.slider-wrapper i { color: var(--text-muted); }
+.slider-wrapper .size-s { font-size: 0.8rem; }
+.slider-wrapper .size-l { font-size: 1.2rem; }
+
+input[type="range"] {
+    flex: 1;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.hub-botoes {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-hub {
+    flex: 1;
+    background: rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.08);
+    color: var(--text-main);
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+body.alto-contraste .btn-hub {
+    border: 1px solid #fff;
+    background: #222;
+}
+
+.btn-hub:hover {
+    background: var(--color-primary);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* --- HERO DESIGN (CABEÇALHO ESTILIZADO) --- */
+.hero-header {
+    max-width: 800px;
+    margin: 80px auto 40px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.badge {
+    background: rgba(27, 94, 32, 0.08);
+    color: var(--color-primary);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: inline-block;
+    margin-bottom: 20px;
+    border: 1px solid rgba(27, 94, 32, 0.1);
+}
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 16px;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.alto-contraste .gradient-text {
+    -webkit-text-fill-color: initial;
+    color: var(--color-primary);
+}
+
+.hero-header p {
+    font-size: 1.25rem;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+/* --- AREA CONTEÚDO PREMIUM --- */
+.app-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.abas-wrapper {
+    display: flex;
+    background: rgba(0,0,0,0.03);
+    padding: 6px;
+    border-radius: var(--radius-md);
+    gap: 6px;
+    margin-bottom: 24px;
+}
+
+body.alto-contraste .abas-wrapper {
+    border: 1px solid #fff;
+    background: #111;
+}
+
+.aba-item {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 14px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.aba-item i { color: var(--color-primary); }
+
+.aba-item.ativa {
+    background: var(--panel-glass);
+    color: var(--color-primary);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.03);
+    border: var(--border-glass);
+}
+
+/* CARDS COM DESIGN GLASSMORPHISM */
+.painel-conteudo {
+    background: var(--panel-glass);
+    border: var(--border-glass);
+    border-radius: var(--radius-xl);
+    padding: 48px;
+    box-shadow: var(--shadow-premium);
+    backdrop-filter: blur(30px);
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.painel-conteudo.ativo {
+    display: block;
+    animation: smoothUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes smoothUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.painel-conteudo h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.painel-conteudo h2 i { color: var(--color-accent); }
+.painel-conteudo p { font-size: 1.15rem; }
+
+footer {
+    text-align: center;
+    margin-top: 80px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    opacity: 0.6;
+}
+
+/* ADAPTAÇÃO MOBILE IMPECÁVEL */
+@media (max-width: 768px) {
+    .hub-acessibilidade {
+        position: static;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    h1 { font-size: 2.3rem; }
+    .abas-wrapper { flex-direction: column; }
+    .painel-conteudo { padding: 30px; }
+}
